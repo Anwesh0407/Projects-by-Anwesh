@@ -52,4 +52,6 @@ Common Issues
 a) npm not recognized → Install Node.js properly and restart terminal.
 b) MongoDB connection error → Ensure your .env MONGO_URI is correct and IP is whitelisted in MongoDB Atlas.
 
+IMPORTANT : USE DUMMY WEBSITE FOR PROPER IMPLIMENTATION
+
 
