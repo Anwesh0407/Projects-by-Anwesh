@@ -1,3 +1,3 @@
-# Projects-by-Anwesh
+# hackodisha
 first hackerthon project
-[hackathon project.zip](https://github.com/user-attachments/files/22197609/hackathon.project.zip)
+[hackathon project.zip](https://github.com/user-attachments/files/22197636/hackathon.project.zip)
