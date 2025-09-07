@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Personal Details Form</title>
+  <style>
+    :root{--accent:#2563eb;--bg:#f7fafc;--card:#ffffff}
+    body{font-family:Inter, system-ui, Arial, sans-serif;background:var(--bg);margin:0;padding:24px;}
+    .container{max-width:840px;margin:0 auto}
+    .card{background:var(--card);border-radius:12px;padding:20px;box-shadow:0 6px 18px rgba(20,20,30,0.06)}
+    h1{margin:0 0 12px;font-size:20px}
+    form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    label{display:block;font-size:13px;margin-bottom:6px;color:#111827}
+    input[type=text], input[type=date], input[type=file], select{width:100%;padding:8px 10px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px}
+    .full{grid-column:1/-1}
+    .small{width:100%;display:flex;gap:8px;align-items:center}
+    .note{font-size:12px;color:#6b7280}
+    .row{display:flex;gap:8px}
+    button{background:var(--accent);color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+    .preview{width:120px;height:140px;border:1px dashed #cbd5e1;border-radius:8px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .preview img{max-width:100%;max-height:100%;object-fit:cover}
+    @media (max-width:720px){form{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Personal Details Form</h1>
+      <form id="personForm" onsubmit="return handleSubmit(event)">
+        <div>
+          <label for="name">Full Name</label>
+          <input id="name" name="name" type="text" required placeholder="Enter full name" />
+        </div>
+
+        <div>
+          <label for="father">Father's Name</label>
+          <input id="father" name="father" type="text" required placeholder="Enter father's name" />
+        </div>
+
+        <div>
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="">-- Select --</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+            <option>Prefer not to say</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="dob">Date of Birth</label>
+          <input id="dob" name="dob" type="date" required />
+        </div>
+
+        <div>
+          <label for="nationality">Nationality</label>
+          <input id="nationality" name="nationality" type="text" required placeholder="e.g. Indian" />
+        </div>
+
+        <div>
+          <label for="religion">Religion</label>
+          <input id="religion" name="religion" type="text" placeholder="Optional" />
+        </div>
+
+        <div>
+          <label for="married">Marital Status</label>
+          <select id="married" name="married" required>
+            <option value="">-- Select --</option>
+            <option>Single</option>
+            <option>Married</option>
+            <option>Divorced</option>
+            <option>Widowed</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="aadhar">Aadhar Number</label>
+          <input id="aadhar" name="aadhar" type="text" inputmode="numeric" pattern="\u002d?\d{12}" maxlength="12" placeholder="12 digits" />
+          <div class="note">12 digits (numbers only). Leave blank if not available.</div>
+        </div>
+
+        <div>
+          <label for="pan">PAN Number</label>
+          <input id="pan" name="pan" type="text" pattern="[A-Z]{5}[0-9]{4}[A-Z]{1}" maxlength="10" placeholder="ABCDE1234F" />
+          <div class="note">PAN format: 5 letters, 4 digits, 1 letter (uppercase).</div>
+        </div>
+
+        <div>
+          <label for="passport">Passport Number</label>
+          <input id="passport" name="passport" type="text" maxlength="9" placeholder="If any" />
+        </div>
+
+        <div class="full">
+          <label for="photo">Upload Photo</label>
+          <div class="row">
+            <input id="photo" name="photo" type="file" accept="image/*" required onchange="previewImage(event)" />
+            <div class="preview" id="photoPreview">No image</div>
+          </div>
+          <div class="note">Preferred size: &lt;2MB. JPEG/PNG allowed.</div>
+        </div>
+
+        <div class="full">
+          <label for="documents">Upload Documents (Aadhar / PAN / Passport etc.)</label>
+          <input id="documents" name="documents" type="file" accept="image/*,application/pdf" multiple />
+          <div class="note">You can upload multiple files. PDFs or images accepted.</div>
+        </div>
+
+        <div class="full" style="display:flex;justify-content:flex-end;gap:8px;margin-top:6px">
+          <button type="reset">Reset</button>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+
+      <pre id="result" style="margin-top:14px;display:none;background:#f1f5f9;padding:10px;border-radius:8px;overflow:auto"></pre>
+    </div>
+  </div>
+
+  <script>
+    function previewImage(e){
+      const preview = document.getElementById('photoPreview');
+      const file = e.target.files && e.target.files[0];
+      if(!file){ preview.innerText = 'No image'; return }
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      img.onload = () => URL.revokeObjectURL(img.src);
+      preview.innerHTML = '';
+      preview.appendChild(img);
+    }
+
+    function handleSubmit(ev){
+      ev.preventDefault();
+      const f = ev.target;
+      // basic client-side validation for patterns
+      const aadhar = f.aadhar.value.trim();
+      if(aadhar && !/^\d{12}$/.test(aadhar)){
+        alert('Aadhar must be 12 digits'); return false;
+      }
+      const pan = f.pan.value.trim();
+      if(pan && !/^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan)){
+        alert('PAN must match pattern: ABCDE1234F'); return false;
+      }
+
+      const data = {
+        name: f.name.value,
+        father: f.father.value,
+        gender: f.gender.value,
+        dob: f.dob.value,
+        nationality: f.nationality.value,
+        religion: f.religion.value,
+        marital_status: f.married.value,
+        aadhar: aadhar || null,
+        pan: pan || null,
+        passport: f.passport.value || null,
+        documents: Array.from(f.documents.files).map(file => file.name),
+        photo: f.photo.files[0] ? f.photo.files[0].name : null
+      };
+
+      // show a JSON preview (in real app send to server)
+      const out = document.getElementById('result');
+      out.style.display = 'block';
+      out.textContent = JSON.stringify(data, null, 2);
+
+      // Example: if you wanted to actually upload, you'd use fetch + FormData here.
+      return false;
+    }
+  </script>
+</body>
+</html>
