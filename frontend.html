@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FillMeUp - Homepage</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    body { font-family: 'Inter', sans-serif; background-color: #F3F4F6; }
+    .form-input {
+        @apply block w-full px-4 py-2 mt-1 bg-gray-50 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out;
+    }
+    .form-label { @apply block text-sm font-medium text-gray-700 mb-1; }
+</style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+<!-- Header -->
+<header class="bg-white shadow-sm p-4 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-gray-800">FillMeUp</a>
+        <nav>
+            <a href="#" id="home-link" class="text-gray-600 hover:text-blue-600 font-medium transition duration-150 ease-in-out rounded-lg px-4 py-2">Home</a>
+            <a href="#" id="create-profile-link" class="bg-blue-600 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-150 ease-in-out shadow-md">Create Profile</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Main -->
+<main class="flex-grow flex items-center justify-center p-4">
+    <div id="homepage" class="text-center transition-opacity duration-500 ease-in-out opacity-100">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">Welcome to FillMeUp</h1>
+        <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Discover a smarter way to connect and manage your profile. Get started by creating your account.
+        </p>
+        <button id="get-started-btn" class="bg-blue-600 text-white font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition duration-200 ease-in-out transform hover:-translate-y-1">
+            Create My Profile
+        </button>
+    </div>
+
+    <!-- Profile Form -->
+    <div id="profile-form-container" class="bg-white p-8 md:p-12 rounded-2xl shadow-xl w-full max-w-2xl hidden opacity-0 transition-opacity duration-500 ease-in-out">
+        <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Create Your Profile</h2>
+        <form id="profile-form" class="space-y-6" enctype="multipart/form-data">
+            <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Personal Information</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="fullName" class="form-label">Full Name:</label>
+                        <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Your Full Name" required>
+                    </div>
+                    <div>
+                        <label for="fatherName" class="form-label">Father's Name:</label>
+                        <input type="text" id="fatherName" name="fatherName" class="form-input" placeholder="Your Father's Name" required>
+                    </div>
+                    <div>
+                        <label for="dob" class="form-label">Date of Birth:</label>
+                        <input type="date" id="dob" name="dob" class="form-input" required>
+                    </div>
+                    <div>
+                        <label for="gender" class="form-label">Gender:</label>
+                        <select id="gender" name="gender" class="form-input" required>
+                            <option value="" disabled selected>--Select--</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="nationality" class="form-label">Nationality:</label>
+                        <input type="text" id="nationality" name="nationality" class="form-input" placeholder="Your Nationality" required>
+                    </div>
+                    <div>
+                        <label for="religion" class="form-label">Religion:</label>
+                        <input type="text" id="religion" name="religion" class="form-input">
+                    </div>
+                    <div>
+                        <label for="maritalStatus" class="form-label">Marital Status:</label>
+                        <select id="maritalStatus" name="maritalStatus" class="form-input">
+                            <option value="" disabled selected>--Select--</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                            <option value="divorced">Divorced</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="bloodGroup" class="form-label">Blood Group:</label>
+                        <input type="text" id="bloodGroup" name="bloodGroup" class="form-input" placeholder="e.g., O+">
+                    </div>
+                    <div>
+                        <label for="aadhaarNumber" class="form-label">Aadhaar Number:</label>
+                        <input type="text" id="aadhaarNumber" name="aadhaarNumber" class="form-input" placeholder="xxxx xxxx xxxx">
+                    </div>
+                    <div>
+                        <label for="panNumber" class="form-label">PAN Number:</label>
+                        <input type="text" id="panNumber" name="panNumber" class="form-input" placeholder="ABCDE1234F">
+                    </div>
+                    <div>
+                        <label for="passportNumber" class="form-label">Passport Number:</label>
+                        <input type="text" id="passportNumber" name="passportNumber" class="form-input">
+                    </div>
+                    <div class="col-span-1 md:col-span-2">
+                        <label for="identificationMark" class="form-label">Identification Mark:</label>
+                        <textarea id="identificationMark" name="identificationMark" rows="2" class="form-input"></textarea>
+                    </div>
+                    <div class="col-span-1 md:col-span-2">
+                        <label for="photo-upload" class="form-label">Photo Upload:</label>
+                        <input type="file" id="photo-upload" name="photo-upload" class="form-input" accept="image/*">
+                    </div>
+                    <div class="col-span-1 md:col-span-2">
+                        <label for="document-upload" class="form-label">Document Upload:</label>
+                        <input type="file" id="document-upload" name="document-upload" class="form-input" multiple>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="bg-blue-600 text-white font-semibold py-3 px-12 rounded-lg shadow-lg hover:bg-blue-700 transition duration-200 ease-in-out transform hover:-translate-y-1">
+                    Save
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white text-center p-4 mt-8">
+    <p>&copy; 2024 FillMeUp. All rights reserved.</p>
+</footer>
+
+<script>
+const homepage = document.getElementById('homepage');
+const profileFormContainer = document.getElementById('profile-form-container');
+const createProfileLink = document.getElementById('create-profile-link');
+const getStartedBtn = document.getElementById('get-started-btn');
+const homeLink = document.getElementById('home-link');
+const pageTitle = document.querySelector('title');
+
+function showProfileForm() {
+    profileFormContainer.classList.remove('hidden');
+    setTimeout(() => {
+        profileFormContainer.classList.remove('opacity-0');
+        profileFormContainer.classList.add('opacity-100');
+    }, 10);
+    homepage.classList.remove('opacity-100');
+    homepage.classList.add('opacity-0');
+    setTimeout(() => homepage.classList.add('hidden'), 500);
+    pageTitle.textContent = "FillMeUp - Create Your Profile";
+}
+
+function showHomepage() {
+    homepage.classList.remove('hidden');
+    setTimeout(() => homepage.classList.remove('opacity-0'), 10);
+    homepage.classList.add('opacity-100');
+    profileFormContainer.classList.remove('opacity-100');
+    profileFormContainer.classList.add('opacity-0');
+    setTimeout(() => profileFormContainer.classList.add('hidden'), 500);
+    pageTitle.textContent = "FillMeUp - Homepage";
+}
+
+createProfileLink.addEventListener('click', e => { e.preventDefault(); showProfileForm(); });
+getStartedBtn.addEventListener('click', e => { e.preventDefault(); showProfileForm(); });
+homeLink.addEventListener('click', e => { e.preventDefault(); showHomepage(); });
+
+// Form submission using FormData (multipart)
+document.getElementById('profile-form').addEventListener('submit', async function(e){
+    e.preventDefault();
+    const formData = new FormData(this); // preserves file uploads
+
+    try {
+        const res = await fetch('http://localhost:5000/api/profiles', {
+            method: 'POST',
+            body: formData // don't set Content-Type; browser handles it
+        });
+        const result = await res.json();
+        if(result.success){
+            alert('Profile saved successfully!');
+            this.reset();
+            showHomepage();
+        } else {
+            alert('Failed to save profile.');
+        }
+    } catch(err){
+        console.error(err);
+        alert('Error connecting to server.');
+    }
+});
+</script>
+</body>
+</html>
+
+
